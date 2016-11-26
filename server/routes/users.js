@@ -27,4 +27,4 @@ router.get('/users', function(req, res) {
   });
 });   
 
-export router; 
+export default router; 

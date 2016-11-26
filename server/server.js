@@ -1,7 +1,8 @@
 import express from 'express'
 //import path from 'path'
 import bodyParser from 'body-parser' 
-import routes from './routes/*'   
+//import  * as routes from './routes/'   
+import  routesindex from './routes/index'   
 import logger from './logger' 
 import mongoose from 'mongoose' 
 import jwt from 'jsonwebtoken' 
@@ -13,8 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret); // secret variable
  
-
-app.use('/', routes);
+/*
+* Routes 
+*/
+app.use('/', routesindex);
 
  
 
@@ -45,4 +48,9 @@ if (config.debug_mode) {
 
 
 
-app.listen(config.port);
+app.listen(config.port, (err) => {
+	if(err)  throw err;
+
+	console.log(`Server Run with port:  ${config.port}`)
+
+});
