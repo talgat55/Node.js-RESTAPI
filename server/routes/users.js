@@ -1,30 +1,30 @@
 import express from 'express';  
+import User from '../models/users';  
 let router = express.Router();
 
 router.get('/setup', (req, res) => {
+  	let data = { 
+    	username: 'NickCerminara', 
+    	password: 'password' 
+  	};
+	User.create(data,(err)=>{
 
-  // create a sample user
-  let nick = new User({ 
-    name: 'Nick Cerminara', 
-    password: 'password',
-    admin: true 
-  });
+		if(err)  throw err;
+		res.send("good")
+	})	
+   
 
-  // save the sample user
-  nick.save((err) => {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
 });
 
-
-// route to return all users (GET http://localhost:8080/api/users)
+ 
 router.get('/users', function(req, res) {
-  User.find({}, function(err, users) {
-    res.json(users);
-  });
+
+	User.findItems({}, (err, data)=>{
+
+		res.send(data)
+
+	})
+
 });   
 
 export default router; 

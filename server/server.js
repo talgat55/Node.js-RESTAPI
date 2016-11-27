@@ -3,21 +3,20 @@ import express from 'express'
 import bodyParser from 'body-parser' 
 //import  * as routes from './routes/'   
 import  routesindex from './routes/index'   
-import logger from './logger' 
-import mongoose from 'mongoose' 
+import  routesusers from './routes/users'   
+//import logger from './logger'  
 import jwt from 'jsonwebtoken' 
-import config from '../config/config' 
+import config from '../config/config.json' 
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect(config.database); // connect to database
-app.set('superSecret', config.secret); // secret variable
- 
+app.set('superSecret', config.secret); // secret variable 
 /*
 * Routes 
 */
 app.use('/', routesindex);
+app.use('/users', routesusers);
 
  
 
