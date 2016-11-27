@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 //import  * as routes from './routes/'   
 import  routesindex from './routes/index'   
 import  routesusers from './routes/users'   
-//import logger from './logger'  
+import logger from './logger'  
 import jwt from 'jsonwebtoken' 
 import config from '../config/config.json' 
 let app = express();

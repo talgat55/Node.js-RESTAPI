@@ -11,7 +11,8 @@ router.get('/setup', (req, res) => {
 
 		if(err)  throw err;
 		res.send("good")
-	})	
+	})
+	//res.send("works");
    
 
 });
@@ -20,7 +21,7 @@ router.get('/setup', (req, res) => {
 router.get('/users', function(req, res) {
 
 	User.findItems({}, (err, data)=>{
-
+		if (err) throw err;
 		res.send(data)
 
 	})
