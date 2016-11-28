@@ -1,7 +1,19 @@
+import bcrypt from 'bcrypt-nodejs'
 let userModel = require('../database').models.user;  
+
 let create = (data, callback) => {
     var newUser = new userModel(data);
-    newUser.save(callback);
+    bcrypt.genSalt(11, (err, salt) => {
+        if (err) throw err;
+
+        // hash the password using our new salt
+        bcrypt.hash(newUser.password, salt, null,  (err, hash) => {
+            if (err) throw err;
+ 
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    }); 
 };
 
 let findOne = (data, callback) => {
@@ -16,6 +28,7 @@ let findItems = (data, callback) => {
     userModel.find(data, callback);
 }
 
+    
 
 /**
  * Find a user, and create one if doesn't exist already.

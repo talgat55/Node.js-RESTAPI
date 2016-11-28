@@ -5,7 +5,10 @@ let router = express.Router();
 router.get('/setup', (req, res) => {
   	let data = { 
     	username: 'NickCerminara', 
-    	password: 'password' 
+    	password: 'password',
+    	socialId: 'socid', 
+    	admin: true 
+    	
   	};
 	User.create(data,(err)=>{
 
