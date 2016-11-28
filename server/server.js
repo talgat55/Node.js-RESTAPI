@@ -1,24 +1,30 @@
 import express from 'express'
+import cors from 'cors'
 //import path from 'path'
 import bodyParser from 'body-parser' 
 //import  * as routes from './routes/'   
 import  routesindex from './routes/index'   
-import  routesusers from './routes/users'   
+import  routesusers from './routes/users'    
+
 //import logger from './logger'  
 import jwt from 'jsonwebtoken' 
 import config from '../config/config.json' 
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.set('superSecret', config.secret); // secret variable 
+ 
 /*
 * Routes 
-*/
+*/ 
 app.use('/', routesindex);
 app.use('/users', routesusers);
 
  
+/*
+* Cors
+*/
+app.use(cors());
+
 
 /*
 app.use((req, res, next) => {

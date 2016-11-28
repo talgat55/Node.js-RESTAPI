@@ -3,10 +3,13 @@ let userModel = require('../database').models.user;
 
 let create = (data, callback) => {
     var newUser = new userModel(data);
+
+        // hash the password using  salt
     bcrypt.genSalt(11, (err, salt) => {
         if (err) throw err;
 
-        // hash the password using our new salt
+            newUser.salt = salt;
+            
         bcrypt.hash(newUser.password, salt, null,  (err, hash) => {
             if (err) throw err;
  
@@ -16,8 +19,11 @@ let create = (data, callback) => {
     }); 
 };
 
-let findOne = (data, callback) => {
-    userModel.findOne(data, callback);
+let findOne = (data, callback) => { 
+
+  userModel.findOne({
+    username: data
+  }, callback);
 }
 
 let findById = (id, callback) => {
